@@ -2,15 +2,16 @@
 <html lang="ja">
     <head>
         <meta charset="utf-8">
-        <title>盗難自転車情報</title>
+        <title>捜索中の自転車一覧</title>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         <!-- <link rel="stylesheet" href="{{ asset('css/stolen_bicycles.css') }}"> -->
     </head>
     <body>
-        <h1>盗難自転車情報</h1>
+        <h1>捜索中の自転車一覧</h1>
         <div class='slnbikes'>
-            <a href='stolenbicycles/create'>自転車を盗まれた方はこちら</a>
+            <a href='abandonedbicycles'>自転車を紛失された方はこちら（発見された自転車一覧）<br><br></a>
+            <a href='abandonedbicycles/create'>放置自転車情報登録<br>※ログインが必要です．<br><br></a>
             @foreach ($slnbikes as $slnbike)
                 <a href="/stolenbicycles/ {{ $slnbike->id }}">
                     <div class="slnbike">

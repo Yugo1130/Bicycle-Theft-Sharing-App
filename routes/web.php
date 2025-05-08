@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StolenBicycleController;
+use App\Http\Controllers\AbandonedBicycleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,8 @@ Route::get('/stolenbicycles', [StolenBicycleController::class, 'index']);
 Route::get('/stolenbicycles/create', [StolenBicycleController::class, 'create']); //要ログイン
 Route::get('/stolenbicycles/{slnbike}', [StolenBicycleController::class, 'show']);
 Route::Post('/stolenbicycles', [StolenBicycleController::class, 'store']);
+Route::get('/abandonedbicycles', [AbandonedBicycleController::class, 'index']);
+Route::get('/abandonedbicycles/create', [AbandonedBicycleController::class, 'create']); //要ログイン
+Route::get('/abandonedbicycles/{abdbike}', [AbandonedBicycleController::class, 'show']);
+Route::Post('/abandonedbicycles', [AbandonedBicycleController::class, 'store']);
+
