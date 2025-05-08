@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StolenBicycleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [StolenBicycleController::class, 'root']);
+Route::get('/stolenbicycles', [StolenBicycleController::class, 'index']);
+Route::get('/stolenbicycles/create', [StolenBicycleController::class, 'create']); //要ログイン
+Route::get('/stolenbicycles/{slnbike}', [StolenBicycleController::class, 'show']);
+Route::Post('/stolenbicycles', [StolenBicycleController::class, 'store']);
