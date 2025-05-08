@@ -1,0 +1,28 @@
+/* public内にないと動かないよ */
+body {
+    background-color: #f0f8ff;
+}
+.slnbikes {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.slnbike {
+    border: 2px solid #000;
+    padding: 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #fff;
+}
+
+.bike-image {
+    width: 150px;
+    height: auto;
+    margin-right: 16px;
+}
+
+.bike-info p {
+    margin: 4px 0;
+}
