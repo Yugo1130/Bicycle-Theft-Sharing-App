@@ -5,14 +5,36 @@
         <title>発見された自転車一覧</title>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-        <!-- <link rel="stylesheet" href="{{ asset('css/abandoned_bicycles.css') }}"> -->
     </head>
     <body>
+        <a href='stolenbicycles'>自転車盗難情報はこちら<br><br></a>
+        <a href='stolenbicycles/create'>探している自転車が一覧にない場合はこちら（盗難自転車情報登録）<br>※ログインが必要です．<br><br></a>
         <h1>発見された自転車一覧</h1>
+        <form action="/abandonedbicycles" method="GET">
+            車種：
+            <select name="model">
+                <option value="">-- 選択してください --</option>
+                @foreach ($models as $model)
+                    <option value="{{ $model }}" {{ request('model') === $model ? 'selected' : '' }}>
+                        {{ $model }}
+                    </option>
+                @endforeach
+            </select>
+            メーカー：
+            <input type="text" name="manufacturer" placeholder="メーカーを入力" value="{{ request('manufacturer') }}">
+            車体番号：
+            <input type="text" name="frame_num" placeholder="車体番号を入力" value="{{ request('frame_num') }}">
+            防犯登録番号：
+            <input type="text" name="bouhan_num" placeholder="防犯登録番号を入力" value="{{ request('bouhan_num') }}">
+            <button type="submit">検索</button>
+        </form>
+        <a href="/abandonedbicycles">
+            <button type="button">絞り込み条件クリア</button>
+        </a>
+
         <div class='abdbikes'>
-            <a href='stolenbicycles/create'>見つからない場合（盗難自転車情報登録）<br>※ログインが必要です．<br><br></a>
             @foreach ($abdbikes as $abdbike)
-                <a href="/abandonedbicycles/ {{ $abdbike->id }}">
+                <a href="/abandonedbicycles/{{ $abdbike->id }}">
                     <div class="abdbike">
                         <!-- 要修正 -->
                         <img src="{{ asset('storage/' . $abdbike->image_path) }}" alt="Bike Image" class="bike-image">

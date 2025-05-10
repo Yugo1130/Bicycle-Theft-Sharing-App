@@ -15,6 +15,7 @@ class StolenBicycle extends Model
         'model_name',
         'frame_num',
         'color',
+        'prefecture',
         'bouhan_num',
         'stolen_at',
         'stolen_location',
@@ -28,14 +29,37 @@ class StolenBicycle extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function stolenbicycles()
+    public function stolencomments()
     {
-        return $this->hasMany(StolenBicycle::class);
+        return $this->hasMany(StolenComment::class);
     }
+    
 
-    public function getPaginateByLimit(int $limit_count = 3)
+    public function getPaginateByLimit(int $limit_count = 5)
     {
         return $this->orderBy('updated_at', 'DESC')->paginate($limit_count);
+    }
 
+    public function getFiltered($inputs, int $limit_count = 5)
+    {
+        $query = $this->newQuery();
+
+        if (!empty($inputs['model'])) {
+            $query->where('model', 'like', $inputs['model']);
+        }
+
+        if (!empty($inputs['manufacturer'])) {
+            $query->where('manufacturer', 'like', '%' . $inputs['manufacturer'] . '%');
+        }
+
+        if (!empty($inputs['frame_num'])) {
+            $query->where('frame_num', 'like', '%' . $inputs['frame_num'] . '%');
+        }
+
+        if (!empty($inputs['bouhan_num'])) {
+            $query->where('bouhan_num', 'like', '%' . $inputs['bouhan_num'] . '%');
+        }
+
+        return $query->orderBy('updated_at', 'desc')->paginate($limit_count);
     }
 }
