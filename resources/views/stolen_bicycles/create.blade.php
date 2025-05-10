@@ -13,12 +13,20 @@
             @csrf
             <div class="model">
                 <label for="model">車種</label>
-                <input type="text" name="stolenbicycle[model]" id="model">
+                <select name="stolenbicycle[model]">
+                    <option value="">-- 選択してください --</option>
+                    @foreach ($models as $model)
+                        <option value="{{ $model }}">{{ $model }}</option>
+                    @endforeach
+                </select>
             </div>
-            <div class="manufacturer">
-                <label for="manufacturer">メーカー名</label>
-                <input type="text" name="stolenbicycle[manufacturer]" id="manufacturer">
-            </div>
+            <label for="manufacturer">メーカー名</label>
+            <input list="manufacturer_list" name="stolenbicycle[manufacturer]" id="manufacturer">
+            <datalist id="manufacturer_list">
+                @foreach($manufacturers as $key => $value)
+                    <option value="{{ $key }}（{{ $value }}）"></option>
+                @endforeach
+            </datalist>
             <div class="model_name">
                 <label for="model_name">車体名</label>
                 <input type="text" name="stolenbicycle[model_name]" id="model_name">
@@ -33,6 +41,12 @@
             </div>
             <div class="bouhan_num">
                 <label for="bouhan_num">防犯登録</label>
+                <select name="stolenbicycle[prefecture]" id="prefecture">
+                    <option value="">-- 選択してください --</option>
+                    @foreach ($prefectures as $key => $value)
+                        <option value="{{ $key }}">{{ $key }}</option>
+                    @endforeach
+                </select>
                 <input type="text" name="stolenbicycle[bouhan_num]" id="bouhan_num">
             </div>
             <div class="stolen_at">
@@ -62,4 +76,20 @@
             <a href="/stolenbicycles">登録をやめる</a>
         </div>
     </body>
+    <script>
+        const prefectures = @json($prefectures);
+        
+        const select = document.getElementById('prefecture');
+        const input = document.getElementById('bouhan_num');
+        
+        select.addEventListener('change', function () {
+            const selected = select.value;
+
+            if (selected && prefectures[selected]) {
+                input.placeholder = prefectures[selected];
+            } else {
+                input.placeholder = '';
+            }
+        });
+    </script>
 </html>

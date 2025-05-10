@@ -18,4 +18,9 @@ class StolenComment extends Model
     {
         return $this->belongsTo(StolenBicycle::class);
     }
+
+    public function getPaginateByLimit(int $limit_count = 5)
+    {
+        return $this->orderBy('created_at', 'DESC')->paginate($limit_count);
+    }
 }

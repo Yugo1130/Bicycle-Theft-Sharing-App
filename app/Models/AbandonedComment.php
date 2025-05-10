@@ -18,4 +18,9 @@ class AbandonedComment extends Model
     {
         return $this->belongsTo(AbandonedBicycle::class);
     }
+
+    public function getPaginateByLimit(int $limit_count = 5)
+    {
+        return $this->orderBy('created_at', 'DESC')->paginate($limit_count);
+    }
 }

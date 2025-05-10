@@ -15,6 +15,7 @@ class AbandonedBicycle extends Model
         'model_name',
         'frame_num',
         'color',
+        'prefecture',
         'bouhan_num',
         'found_at',
         'found_location',
@@ -28,14 +29,36 @@ class AbandonedBicycle extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function abandonebicycles()
+    public function abandonedcomments()
     {
-        return $this->hasMany(AbandoneBicycle::class);
-    }
+        return $this->hasMany(AbandonedComment::class);
+    }    
 
-    public function getPaginateByLimit(int $limit_count = 3)
+    public function getPaginateByLimit(int $limit_count = 5)
     {
         return $this->orderBy('updated_at', 'DESC')->paginate($limit_count);
+    }
 
+    public function getFiltered($inputs, int $limit_count = 5)
+    {
+        $query = $this->newQuery();
+
+        if (!empty($inputs['model'])) {
+            $query->where('model', 'like', $inputs['model']);
+        }
+
+        if (!empty($inputs['manufacturer'])) {
+            $query->where('manufacturer', 'like', '%' . $inputs['manufacturer'] . '%');
+        }
+
+        if (!empty($inputs['frame_num'])) {
+            $query->where('frame_num', 'like', '%' . $inputs['frame_num'] . '%');
+        }
+
+        if (!empty($inputs['bouhan_num'])) {
+            $query->where('bouhan_num', 'like', '%' . $inputs['bouhan_num'] . '%');
+        }
+
+        return $query->orderBy('updated_at', 'desc')->paginate($limit_count);
     }
 }
