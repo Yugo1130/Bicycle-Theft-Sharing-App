@@ -90,16 +90,6 @@
                 {{ __('放置自転車一覧') }}
             </x-nav-link>
         </div>
-        <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-            <x-nav-link :href="route('sln.index')" :active="request()->routeIs('sln.index')">
-                {{ __('盗難自転車一覧') }}
-            </x-nav-link>
-        </div>
-        <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-            <x-nav-link :href="route('abd.index')" :active="request()->routeIs('abd.index')">
-                {{ __('放置自転車一覧') }}
-            </x-nav-link>
-        </div>
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
