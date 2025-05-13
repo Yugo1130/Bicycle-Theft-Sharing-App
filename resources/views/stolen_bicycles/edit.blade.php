@@ -7,6 +7,18 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
     <body>
+        <div>
+            @if (Auth::check())
+            ログインユーザ：{{ Auth::user()->name }}
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit">ログアウト</button>
+            </form>
+            @else
+            @php(session(['login.from' => url()->full()]))
+            <a href="{{ route('login') }}">ログイン</a>
+            @endif
+        </div>
         <h1>盗難自転車情報登録</h1>
         <form action="/stolenbicycles/{{ $slnbike->id }}" method="POST" enctype="multipart/form-data">
             @csrf

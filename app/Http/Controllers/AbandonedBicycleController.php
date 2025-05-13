@@ -51,8 +51,7 @@ class AbandonedBicycleController extends Controller
         $image_path = "/a/b/c/d"; //後で実装
         $abdbike->image_path = $image_path;
         // dd($image_path);
-        $abdbike->user_id = 2; //仮
-        // $user_id = auth()->id();
+        $abdbike->user_id = auth()->id();
         $input = $request['abandonedbicycle'];
         $abdbike->fill($input)->save();
         return redirect('/abandonedbicycles/' . $abdbike->id);
@@ -99,8 +98,7 @@ class AbandonedBicycleController extends Controller
         $image_path = "/a/b/c/d"; //後で実装
         $abdbike->image_path = $image_path;
         // dd($image_path);
-        $abdbike->user_id = 2; //仮
-        // $user_id = auth()->id();
+        $abdbike->user_id = auth()->id();
         $input = $request['abandonedbicycle'];
         $abdbike->fill($input)->save();
         return redirect('/abandonedbicycles/' . $abdbike->id);

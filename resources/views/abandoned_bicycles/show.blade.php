@@ -8,6 +8,18 @@
         <!-- <link rel="stylesheet" href="{{ asset('css/abandone_bicycles.css') }}"> -->
     </head>
     <body>
+        <div>
+            @if (Auth::check())
+            ログインユーザ：{{ Auth::user()->name }}
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit">ログアウト</button>
+            </form>
+            @else
+            @php(session(['login.from' => url()->full()]))
+            <a href="{{ route('login') }}">ログイン</a>
+            @endif
+        </div>
         <h1>発見された自転車の詳細</h1>
         <div class='abdbikes'>
             <div class="abdbike">
@@ -28,41 +40,52 @@
                 <p><strong>最終更新日：</strong>{{ $abdbike->updated_at }}</p>
             </div>
         </div>
-        <a href="{{ url('/abandonedbicycles/' . $abdbike->id . '/edit') }}">
-            <button type="button">編集</button>
-        </a>
-                <!-- 要ログインかつ投稿したユーザであるかの判別を加える -->
-                <form action="/abandonedbicycles/{{ $abdbike->id }}" id="form_{{ $abdbike->id }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <!-- button type="submit"だと確認せずに送信される。以下のようにすると、deleteAbdbike関数でsubmitが呼ばれた際に送信される。 -->
-                    <button type="button" onclick="deleteAbdbike({{ $abdbike->id }})">削除</button> 
-                </form>
-
+        @auth
+        @if (Auth::id() === $abdbike->user_id)
+        <div>
+            <a href="{{ url('/abandonedbicycles/' . $abdbike->id . '/edit') }}">
+                <button type="button">編集</button>
+            </a>
+            <form action="/abandonedbicycles/{{ $abdbike->id }}" id="form_{{ $abdbike->id }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="button" onclick="deleteAbdbike({{ $abdbike->id }})">削除</button> 
+            </form>
+        </div>
+        @endif
+        @endauth
         <div class="footer">
             <a href="/abandonedbicycles">一覧へ戻る</a>
         </div>
 
         <h2>コメント作成</h2>
+        @if (Auth::check())
         <form action="/abandonedbicycles/{{ $abdbike->id }}/comments" method="POST">
             @csrf
             <textarea name="comment" rows="4" cols="50" required></textarea>
             <br>
             <button type="submit">投稿</button>
         </form>
+        @else
+        @php(session(['login.from' => url()->full()]))
+        <a href="{{ route('login') }}">コメントを投稿するにはログインしてください．</a>
+        @endif
         <h2>コメント一覧</h2>
         <div class='comments'>
             @foreach ($comments as $comment)
-                <div class="comment">
-                    <p><small>投稿者ID: {{ $comment->user_id }} 投稿日時: {{ $comment->created_at }}</small></p>
-                    <p>{{ $comment->comment }}</p>
-                    <!-- 要ログインかつ投稿したユーザであるかの判別を加える -->
-                    <form action="/abandonedcomments/{{ $comment->id }}" id="form_{{ $comment->id }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                    <button type="button" onclick="deletecomment({{ $comment->id }})">削除</button> 
-                </form>
-                </div>
+            <div class="comment">
+                <p><small>投稿者ID: {{ $comment->user_id }} 投稿日時: {{ $comment->created_at }}</small></p>
+                <p>{{ $comment->comment }}</p>
+                @auth
+                @if (Auth::id() === $comment->user_id)
+                <form action="/abandonedcomments/{{ $comment->id }}" id="form_{{ $comment->id }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                <button type="button" onclick="deletecomment({{ $comment->id }})">削除</button> 
+                @endif
+                @endauth
+            </form>
+            </div>
             @endforeach
         </div>
 
