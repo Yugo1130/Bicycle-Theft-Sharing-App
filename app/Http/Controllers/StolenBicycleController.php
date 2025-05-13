@@ -52,8 +52,7 @@ class StolenBicycleController extends Controller
         $image_path = "/a/b/c/d"; //後で実装
         $slnbike->image_path = $image_path;
         // dd($image_path);
-        $slnbike->user_id = 2; //仮
-        // $user_id = auth()->id();
+        $slnbike->user_id = auth()->id();
         $input = $request['stolenbicycle'];
         $slnbike->fill($input)->save();
         return redirect('/stolenbicycles/' . $slnbike->id);
@@ -95,8 +94,7 @@ class StolenBicycleController extends Controller
         $image_path = "/a/b/c/d"; //後で実装
         $slnbike->image_path = $image_path;
         // dd($image_path);
-        $slnbike->user_id = 2; //仮
-        // $user_id = auth()->id();
+        $slnbike->user_id = auth()->id();
         $input = $request['stolenbicycle'];
         $slnbike->fill($input)->save();
         return redirect('/stolenbicycles/' . $slnbike->id);

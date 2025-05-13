@@ -12,8 +12,7 @@ class AbandonedCommentController extends Controller
     {
         $comment = new AbandonedComment();
         $comment->abandoned_bicycle_id = $abdbike->id;
-        // $comment->user_id = auth()->id(); // 認証されているユーザ
-        $comment->user_id = 2; //仮
+        $comment->user_id = auth()->id();
         $comment->comment = $request->input('comment');
         $comment->save();
 

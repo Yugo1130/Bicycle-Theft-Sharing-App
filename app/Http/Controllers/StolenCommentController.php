@@ -12,8 +12,7 @@ class StolenCommentController extends Controller
     {
         $comment = new StolenComment();
         $comment->stolen_bicycle_id = $slnbike->id;
-        // $comment->user_id = auth()->id(); // 認証されているユーザ
-        $comment->user_id = 5; //仮
+        $comment->user_id = auth()->id();
         $comment->comment = $request->input('comment');
         $comment->save();
 
@@ -25,7 +24,7 @@ class StolenCommentController extends Controller
         // 必要であれば認可チェックなどを追加
         // if (auth()->id() !== $comment->user_id) { abort(403); }
 
-        $slnbike_id = $comment->Stolen_bicycle_id;
+        $slnbike_id = $comment->stolen_bicycle_id;
         $comment->delete();
         return redirect('/stolenbicycles/' . $slnbike_id);
     }
