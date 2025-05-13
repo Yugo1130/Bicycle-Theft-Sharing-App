@@ -17,7 +17,6 @@ class UserTableSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
-                'id' => 1,
                 'name' => 'User One',
                 'email' => 'user1@example.com',
                 'email_verified_at' => now(),
@@ -27,7 +26,6 @@ class UserTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'id' => 2,
                 'name' => 'User Two',
                 'email' => 'user2@example.com',
                 'email_verified_at' => now(),
@@ -37,7 +35,6 @@ class UserTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'id' => 3,
                 'name' => 'User Three',
                 'email' => 'user3@example.com',
                 'email_verified_at' => now(),
@@ -47,7 +44,6 @@ class UserTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'id' => 4,
                 'name' => 'User Four',
                 'email' => 'user4@example.com',
                 'email_verified_at' => now(),
@@ -57,7 +53,6 @@ class UserTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'id' => 5,
                 'name' => 'User Five',
                 'email' => 'user5@example.com',
                 'email_verified_at' => now(),
@@ -67,7 +62,6 @@ class UserTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'id' => 6,
                 'name' => 'User Six',
                 'email' => 'user6@example.com',
                 'email_verified_at' => now(),
@@ -77,7 +71,6 @@ class UserTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'id' => 7,
                 'name' => 'User Seven',
                 'email' => 'user7@example.com',
                 'email_verified_at' => now(),
@@ -87,7 +80,6 @@ class UserTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'id' => 8,
                 'name' => 'User Eight',
                 'email' => 'user8@example.com',
                 'email_verified_at' => now(),
@@ -97,7 +89,6 @@ class UserTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'id' => 9,
                 'name' => 'User Nine',
                 'email' => 'user9@example.com',
                 'email_verified_at' => now(),
@@ -107,7 +98,6 @@ class UserTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'id' => 10,
                 'name' => 'User Ten',
                 'email' => 'user10@example.com',
                 'email_verified_at' => now(),
