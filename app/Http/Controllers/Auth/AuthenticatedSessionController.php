@@ -29,12 +29,8 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        // まず intended があればそれを使う（authミドルウェアによる遷移）
-        // なければ session に保存しておいた元ページへ
-        // どちらもなければ RouteServiceProvider::HOME へ
-        return redirect()->intended(
-            session()->pull('login.from', RouteServiceProvider::HOME)
-        );    
+        return redirect()->intended(RouteServiceProvider::HOME);
+
     }
 
     /**
