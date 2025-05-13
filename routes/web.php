@@ -28,31 +28,31 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
-Route::group(['middleware' => ['auth']], function(){
-    Route::get('/stolenbicycles/create', [StolenBicycleController::class, 'create']);
-    Route::Post('/stolenbicycles', [StolenBicycleController::class, 'store']);
-    Route::Delete('/stolenbicycles/{slnbike}', [StolenBicycleController::class, 'delete']);
-    Route::put('/stolenbicycles/{slnbike}', [StolenBicycleController::class, 'update']);
-    Route::get('/stolenbicycles/{slnbike}/edit', [StolenBicycleController::class, 'edit']);
-    Route::post('/stolenbicycles/{slnbike}/comments', [StolenCommentController::class, 'store']);
-    Route::Delete('/stolencomments/{comment}', [StolenCommentController::class, 'delete']);
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/stolenbicycles/create', [StolenBicycleController::class, 'create'])->name('sln.create');
+    Route::post('/stolenbicycles', [StolenBicycleController::class, 'store'])->name('sln.store');
+    Route::delete('/stolenbicycles/{slnbike}', [StolenBicycleController::class, 'delete'])->name('sln.delete');
+    Route::put('/stolenbicycles/{slnbike}', [StolenBicycleController::class, 'update'])->name('sln.update');
+    Route::get('/stolenbicycles/{slnbike}/edit', [StolenBicycleController::class, 'edit'])->name('sln.edit');
+    Route::post('/stolenbicycles/{slnbike}/comments', [StolenCommentController::class, 'store'])->name('slncmtstore');
+    Route::delete('/stolencomments/{comment}', [StolenCommentController::class, 'delete'])->name('slncmtdelete');
 });
 
-Route::get('/', [StolenBicycleController::class, 'root']);
-Route::get('/stolenbicycles', [StolenBicycleController::class, 'index']);
-Route::get('/stolenbicycles/{slnbike}', [StolenBicycleController::class, 'show']);
+Route::get('/', [StolenBicycleController::class, 'root'])->name('root');
+Route::get('/stolenbicycles', [StolenBicycleController::class, 'index'])->name('sln.index');
+Route::get('/stolenbicycles/{slnbike}', [StolenBicycleController::class, 'show'])->name('sln.show');
 
-Route::group(['middleware' => ['auth']], function(){
-    Route::get('/abandonedbicycles/create', [AbandonedBicycleController::class, 'create']);
-    Route::Post('/abandonedbicycles', [AbandonedBicycleController::class, 'store']);
-    Route::Delete('/abandonedbicycles/{abdbike}', [AbandonedBicycleController::class, 'delete']);
-    Route::put('/abandonedbicycles/{abdbike}', [AbandonedBicycleController::class, 'update']);
-    Route::get('/abandonedbicycles/{abdbike}/edit', [AbandonedBicycleController::class, 'edit']);
-    Route::post('/abandonedbicycles/{abdbike}/comments', [AbandonedCommentController::class, 'store']);
-    Route::Delete('/abandonedcomments/{comment}', [AbandonedCommentController::class, 'delete']);
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/abandonedbicycles/create', [AbandonedBicycleController::class, 'create'])->name('abd.create');
+    Route::post('/abandonedbicycles', [AbandonedBicycleController::class, 'store'])->name('abd.store');
+    Route::delete('/abandonedbicycles/{abdbike}', [AbandonedBicycleController::class, 'delete'])->name('abd.delete');
+    Route::put('/abandonedbicycles/{abdbike}', [AbandonedBicycleController::class, 'update'])->name('abd.update');
+    Route::get('/abandonedbicycles/{abdbike}/edit', [AbandonedBicycleController::class, 'edit'])->name('abd.edit');
+    Route::post('/abandonedbicycles/{abdbike}/comments', [AbandonedCommentController::class, 'store'])->name('abdcmt.store');
+    Route::delete('/abandonedcomments/{comment}', [AbandonedCommentController::class, 'delete'])->name('abdcmt.delete');
 });
 
-Route::get('/abandonedbicycles', [AbandonedBicycleController::class, 'index']);
-Route::get('/abandonedbicycles/{abdbike}', [AbandonedBicycleController::class, 'show']);
+Route::get('/abandonedbicycles', [AbandonedBicycleController::class, 'index'])->name('abd.index');
+Route::get('/abandonedbicycles/{abdbike}', [AbandonedBicycleController::class, 'show'])->name('abd.show');
