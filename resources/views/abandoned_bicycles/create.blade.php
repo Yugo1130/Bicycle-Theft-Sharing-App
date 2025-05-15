@@ -4,6 +4,15 @@
     </x-slot>
     <form action="/abandonedbicycles" method="POST" enctype="multipart/form-data">
         @csrf
+        <div class="image">
+            <label for="image"></label>
+            <!-- 画像プレビュー -->
+            <img id="imagePreview" src="{{ asset('images/no-image.png') }}" alt="プレビュー画像" style="max-width: 300px; height: auto; margin-bottom: 10px;">
+            <!-- ファイル選択フォーム（acceptで画像のみ許可）-->
+            <div class="file-upload-wrapper">
+                <input type="file" name="image" id="image" accept="image/*">
+            </div>
+        </div>
         <div class="model">
             <label for="model">車種</label>
             <select name="abandonedbicycle[model]">
@@ -45,7 +54,7 @@
         <div class="found_at">
             <label for="found_at">発見日時</label>
             <!-- 要変更 -->
-            <input type="datetime-local" name="abandonedbicycle[found_at]" id="found_at">
+            <input type="datetime-local" name="abandonedbicycle[found_at]" id="found_at" value="{{ now()->format('Y-m-d\TH:i') }}" min="2000-01-01T00:00" max="2099-12-31T23:59">
         </div>
         <div class="found_location">
             <label for="found_location">発見場所</label>
@@ -83,6 +92,16 @@
             } else {
                 input.placeholder = '';
             }
+        });
+        document.getElementById('image').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('imagePreview').src = e.target.result;
+            };
+            reader.readAsDataURL(file);
         });
     </script>
 </x-app-layout>

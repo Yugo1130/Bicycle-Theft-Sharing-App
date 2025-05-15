@@ -5,7 +5,7 @@
     <div class='slnbikes'>
         <div class="slnbike">
             <!-- 要修正 -->
-            <img src="{{ asset('storage/' . $slnbike->image_path) }}" alt="Bike Image" class="bike-image">
+            <img src="{{ empty($slnbike->image_path) ? asset('images/no-image.png') : $slnbike->image_path }}" alt="プレビュー画像" style="max-width: 300px; height: auto;">
             <div class="slnbike-info">
                 <p><strong>車種：</strong>{{ $slnbike->model }}</p>
                 <p><strong>メーカー名：</strong>{{ $slnbike->manufacturer }}</p>

@@ -12,13 +12,16 @@ class AbandonedBicycleController extends Controller
     public function index(Request $request, AbandonedBicycle $abdbike)
     {
         $hasFilter = $request->filled('model') || $request->filled('manufacturer') ||
-                     $request->filled('frame_num') || $request->filled('bouhan_num');
+            $request->filled('frame_num') || $request->filled('bouhan_num');
 
         $models = config("bicycle.models");
 
         if ($hasFilter) {
             $abdbikes = $abdbike->getFiltered($request->only([
-                'model', 'manufacturer', 'frame_num', 'bouhan_num'
+                'model',
+                'manufacturer',
+                'frame_num',
+                'bouhan_num'
             ]));
         } else {
             $abdbikes = $abdbike->getPaginateByLimit();
@@ -47,10 +50,9 @@ class AbandonedBicycleController extends Controller
     public function store(Request $request)
     {
         $abdbike = new AbandonedBicycle();
-        // $image_path = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
-        $image_path = "/a/b/c/d"; //後で実装
-        $abdbike->image_path = $image_path;
-        // dd($image_path);
+        if ($request->hasFile('image')) {
+            $abdbike->image_path = Cloudinary::upload($request->file('image')->getRealPath(), ['public_id' => 'abdbike_' . $abdbike->id, 'overwrite' => true])->getSecurePath();
+        }
         $abdbike->user_id = auth()->id();
         $input = $request['abandonedbicycle'];
         $abdbike->fill($input)->save();
@@ -87,17 +89,15 @@ class AbandonedBicycleController extends Controller
         $manufacturers = collect(config("bicycle.manufacturers"))->sortKeys();
         $prefectures = config("bicycle.prefectures");
         return view('abandoned_bicycles.edit')->with(['abdbike' => $abdbike, 'models' => $models, 'manufacturers' => $manufacturers, 'prefectures' => $prefectures,]);
-
     }
 
     // 編集後投稿登録
     public function update(Request $request, AbandonedBicycle $abdbike)
     {
-        // dd($request->input('abandonedbicycle'))
-        // $image_path = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
-        $image_path = "/a/b/c/d"; //後で実装
-        $abdbike->image_path = $image_path;
-        // dd($image_path);
+        // 画像が選択された時だけ更新する
+        if ($request->hasFile('image')) {
+            $abdbike->image_path = Cloudinary::upload($request->file('image')->getRealPath(), ['public_id' => 'abdbike_' . $abdbike->id, 'overwrite' => true])->getSecurePath();
+        }
         $abdbike->user_id = auth()->id();
         $input = $request['abandonedbicycle'];
         $abdbike->fill($input)->save();

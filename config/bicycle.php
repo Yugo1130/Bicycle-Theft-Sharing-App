@@ -18,6 +18,7 @@ return [
         'miyata' => 'ミヤタ',
         'tern' => 'ターン',
         'MERIDA' => 'メリダ',
+        'GIANT' => 'ジャイアント'
         'GT' => 'ジーティーバイシクル  bicycles',
         'コナ' => 'コナ',
         'Bianchi' => 'ビアンキ',
