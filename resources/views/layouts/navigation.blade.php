@@ -41,7 +41,7 @@
 
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
+                            {{ __('アカウント設定') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->
@@ -51,21 +51,31 @@
                             <x-dropdown-link :href="route('logout')"
                                 onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                {{ __('ログアウト') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
                 </x-dropdown>
                 @endauth
+                <!-- 元のページに戻るためにセッションを保持 -->
+                <!-- なお，loginページとregisterページではセッションを上書きしてはならない -->
                 @guest
+                @php
+                if (!request()->routeIs('login') && !request()->routeIs('register')) {
+                session(['url.intended' => url()->full()]);
+                }
+                @endphp
                 <a href="{{ route('login') }}"
                     class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                     ログイン
                 </a>
+                <a href="{{ route('register') }}"
+                    class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                    新規登録
+                </a>
                 @endguest
             </div>
 
-            <!-- もしかしたら変えないといけないかも -->
             <!-- Hamburger -->
             <div class="-me-2 flex items-center sm:hidden">
                 <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
@@ -101,7 +111,7 @@
 
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
+                    {{ __('アカウント設定') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
@@ -111,7 +121,7 @@
                     <x-responsive-nav-link :href="route('logout')"
                         onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                        {{ __('ログアウト') }}
                     </x-responsive-nav-link>
                 </form>
             </div>
@@ -119,12 +129,15 @@
             @guest
             <div class="px-4">
                 @php
-                if (!session()->has('url.intended') && !request()->routeIs('login')) {
+                if (!request()->routeIs('login') && !request()->routeIs('register')) {
                 session(['url.intended' => url()->full()]);
                 }
                 @endphp
                 <x-responsive-nav-link :href="route('login')">
                     {{ __('ログイン') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('register')">
+                    {{ __('新規登録') }}
                 </x-responsive-nav-link>
             </div>
             @endguest

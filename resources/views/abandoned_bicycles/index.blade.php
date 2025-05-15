@@ -30,14 +30,14 @@
         @foreach ($abdbikes as $abdbike)
         <a href="/abandonedbicycles/{{ $abdbike->id }}">
             <div class="abdbike">
-                <!-- 要修正 -->
-                <img src="{{ asset('storage/' . $abdbike->image_path) }}" alt="Bike Image" class="bike-image">
+                <br>
+                <img src="{{ empty($abdbike->image_path) ? asset('images/no-image.png') : $abdbike->image_path }}" alt="プレビュー画像" style="max-width: 200px; height: auto;">
                 <div class="bike-info">
                     <p><strong>車種：</strong>{{ $abdbike->model }}</p>
                     <p><strong>メーカー名：</strong>{{ $abdbike->manufacturer }}</p>
                     <p><strong>車体名：</strong>{{ $abdbike->model_name }}</p>
                     <p><strong>盗難場所：</strong>{{ $abdbike->found_location }}</p>
-                    <p><strong>最終更新日：</strong>{{ $abdbike->updated_at }}</p>
+                    <p><strong>投稿ユーザID：</strong>{{ $abdbike->user_id }}<strong> / 最終更新日：</strong>{{ $abdbike->updated_at }}</p>
                 </div>
             </div>
         </a>

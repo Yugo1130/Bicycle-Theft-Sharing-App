@@ -4,6 +4,15 @@
     </x-slot>
     <form action="/stolenbicycles" method="POST" enctype="multipart/form-data">
         @csrf
+        <div class="image">
+            <label for="image"></label>
+            <!-- 画像プレビュー -->
+            <img id="imagePreview" src="{{ asset('images/no-image.png') }}" alt="プレビュー画像" style="max-width: 300px; height: auto; margin-bottom: 10px;">
+            <!-- ファイル選択フォーム（acceptで画像のみ許可）-->
+            <div class="file-upload-wrapper">
+                <input type="file" name="image" id="image" accept="image/*">
+            </div>
+        </div>
         <div class="model">
             <label for="model">車種</label>
             <select name="stolenbicycle[model]">
@@ -45,7 +54,7 @@
         <div class="stolen_at">
             <label for="stolen_at">盗難日時</label>
             <!-- 要変更 -->
-            <input type="datetime-local" name="stolenbicycle[stolen_at]" id="stolen_at">
+            <input type="datetime-local" name="stolenbicycle[stolen_at]" id="stolen_at" value="{{ now()->format('Y-m-d\TH:i') }}" min="2000-01-01T00:00" max="2099-12-31T23:59">
         </div>
         <div class="stolen_location">
             <label for="stolen_location">盗難場所</label>
@@ -58,10 +67,6 @@
         <div class="other">
             <label for="other">その他</label>
             <textarea name="stolenbicycle[other]" id="other"></textarea>
-        </div>
-        <div class="image">
-            <label for="image">画像</label>
-            <input type="file" name="image" id="image">
         </div>
         <input type="submit" value="登録" />
     </form>
@@ -82,6 +87,16 @@
             } else {
                 input.placeholder = '';
             }
+        });
+        document.getElementById('image').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('imagePreview').src = e.target.result;
+            };
+            reader.readAsDataURL(file);
         });
     </script>
 </x-app-layout>

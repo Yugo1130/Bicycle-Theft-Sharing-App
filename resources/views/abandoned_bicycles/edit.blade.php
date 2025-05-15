@@ -5,6 +5,16 @@
     <form action="/abandonedbicycles/{{ $abdbike->id }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
+        <div class="image">
+            <label for="image"></label>
+            <!-- 画像プレビュー（初期状態では既存画像を表示） -->
+            <img id="imagePreview" src="{{ empty($abdbike->image_path) ? asset('images/no-image.png') : $abdbike->image_path }}" alt="プレビュー画像" style="max-width: 300px; height: auto; margin-bottom: 10px;">
+            <p>変更したい場合は新しい画像を選択してください．</p>
+            <!-- ファイル選択フォーム（acceptで画像のみ許可）-->
+            <div class="file-upload-wrapper">
+                <input type="file" name="image" id="image" accept="image/*">
+            </div>
+        </div>
         <div class="model">
             <label for="model">車種</label>
             <select name="abandonedbicycle[model]">
@@ -35,10 +45,6 @@
             <label for="color">色</label>
             <input type="text" name="abandonedbicycle[color]" value="{{ $abdbike->color }}" id="color">
         </div>
-        <!-- <div class="bouhan_num">
-                <label for="bouhan_num">防犯登録</label>
-                <input type="text" name="abandonedbicycle[bouhan_num]" value="{{ $abdbike->bouhan_num }}" id="bouhan_num">
-            </div> -->
         <div class="bouhan_num">
             <label for="bouhan_num">防犯登録</label>
             <select name="abandonedbicycle[prefecture]" id="prefecture" value="{{ $abdbike->prefecture }}">
@@ -51,8 +57,7 @@
         </div>
         <div class="found_at">
             <label for="found_at">発見日時</label>
-            <!-- 要変更 -->
-            <input type="datetime-local" name="abandonedbicycle[found_at]" value="{{ $abdbike->found_at }}" id="found_at">
+            <input type="datetime-local" name="abandonedbicycle[found_at]" value="{{ $abdbike->found_at }}" id="found_at" min="2000-01-01T00:00" max="2099-12-31T23:59">
         </div>
         <div class="found_location">
             <label for="found_location">発見場所</label>
@@ -65,11 +70,6 @@
         <div class="other">
             <label for="other">その他</label>
             <textarea name="abandonedbicycle[other]" id="other">{{ $abdbike->other }}</textarea>
-        </div>
-        <!-- 画像は後程実装 -->
-        <div class="image">
-            <label for="image">画像</label>
-            <input type="file" name="image" id="image">
         </div>
         <input type="submit" value="更新" />
     </form>
@@ -90,6 +90,16 @@
             } else {
                 input.placeholder = '';
             }
+        });
+        document.getElementById('image').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('imagePreview').src = e.target.result;
+            };
+            reader.readAsDataURL(file);
         });
     </script>
 </x-app-layout>

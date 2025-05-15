@@ -5,7 +5,7 @@
     <div class='abdbikes'>
         <div class="abdbike">
             <!-- 要修正 -->
-            <img src="{{ asset('storage/' . $abdbike->image_path) }}" alt="Bike Image" class="bike-image">
+            <img src="{{ empty($abdbike->image_path) ? asset('images/no-image.png') : $abdbike->image_path }}" alt="プレビュー画像" style="max-width: 300px; height: auto;">
             <div class="abdbike-info">
                 <p><strong>車種：</strong>{{ $abdbike->model }}</p>
                 <p><strong>メーカー名：</strong>{{ $abdbike->manufacturer }}</p>

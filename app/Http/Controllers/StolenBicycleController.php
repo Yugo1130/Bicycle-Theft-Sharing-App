@@ -48,10 +48,9 @@ class StolenBicycleController extends Controller
     public function store(Request $request)
     {
         $slnbike = new StolenBicycle();
-        // $image_path = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
-        $image_path = "/a/b/c/d"; //後で実装
-        $slnbike->image_path = $image_path;
-        // dd($image_path);
+        if ($request->hasFile('image')) {
+            $slnbike->image_path = Cloudinary::upload($request->file('image')->getRealPath(), ['public_id' => 'slnbike_' . $slnbike->id, 'overwrite' => true])->getSecurePath();
+        }
         $slnbike->user_id = auth()->id();
         $input = $request['stolenbicycle'];
         $slnbike->fill($input)->save();
@@ -90,10 +89,9 @@ class StolenBicycleController extends Controller
 
     public function update(Request $request, StolenBicycle $slnbike)
     {
-        // $image_path = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
-        $image_path = "/a/b/c/d"; //後で実装
-        $slnbike->image_path = $image_path;
-        // dd($image_path);
+        if ($request->hasFile('image')) {
+            $slnbike->image_path = Cloudinary::upload($request->file('image')->getRealPath(), ['public_id' => 'slnbike_' . $slnbike->id, 'overwrite' => true])->getSecurePath();
+        }
         $slnbike->user_id = auth()->id();
         $input = $request['stolenbicycle'];
         $slnbike->fill($input)->save();
