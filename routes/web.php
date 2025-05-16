@@ -37,7 +37,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('/stolenbicycles/{slnbike}', [StolenBicycleController::class, 'update'])->name('sln.update');
     Route::get('/stolenbicycles/{slnbike}/edit', [StolenBicycleController::class, 'edit'])->name('sln.edit');
     Route::post('/stolenbicycles/{slnbike}/comments', [StolenCommentController::class, 'store'])->name('slncmtstore');
-    Route::delete('/stolencomments/{comment}', [StolenCommentController::class, 'delete'])->name('slncmtdelete');
+    Route::delete('/stolencomments/{comment}', [StolenCommentController::class, 'delete'])->name('slncmt.delete');
 });
 
 Route::get('/', [StolenBicycleController::class, 'root'])->name('root');

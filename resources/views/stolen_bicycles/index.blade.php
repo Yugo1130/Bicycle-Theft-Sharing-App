@@ -2,8 +2,10 @@
     <x-slot name="header">
         全国で盗難された自転車の情報です．情報提供をお願いします．
     </x-slot>
-    <a href='abandonedbicycles/create'>放置されている自転車を発見された方（放置自転車情報登録）<br>※ログインが必要です．<br><br></a>
-    <form action="/stolenbicycles" method="GET">
+    <a href="{{ route('abd.create') }}">
+        放置されている自転車を発見された方（放置自転車情報登録）<br>※ログインが必要です．<br><br>
+    </a>
+    <form action="{{ route('sln.index') }}" method="GET">
         車種：
         <select name="model">
             <option value="">-- 選択してください --</option>
@@ -21,12 +23,13 @@
         <input type="text" name="bouhan_num" placeholder="防犯登録番号を入力" value="{{ request('bouhan_num') }}">
         <button type="submit">検索</button>
     </form>
-    <a href="/stolenbicycles">
+    <a href="{{ route('sln.index') }}">
         <button type="button">絞り込み条件クリア</button>
     </a>
+
     <div class='slnbikes'>
         @foreach ($slnbikes as $slnbike)
-        <a href="/stolenbicycles/{{ $slnbike->id }}">
+        <a href="{{ route('sln.show', $slnbike) }}">
             <div class="slnbike">
                 <br>
                 <p><strong>投稿ユーザID：</strong>{{ $slnbike->user_id }}<strong> / 最終更新日：</strong>{{ $slnbike->updated_at }}</p>
