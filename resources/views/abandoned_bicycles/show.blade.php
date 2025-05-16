@@ -4,6 +4,7 @@
     </x-slot>
     <div class='abdbikes'>
         <div class="abdbike">
+            <p><strong>投稿ユーザID：</strong>{{ $abdbike->user_id }}<strong> / 最終更新日：</strong>{{ $abdbike->updated_at }}</p>
             <img src="{{ empty($abdbike->image_path) ? asset('images/no-image.png') : $abdbike->image_path }}" alt="プレビュー画像" style="max-width: 300px; height: auto;">
             <div class="abdbike-info">
                 <p><strong>車種：</strong>{{ $abdbike->model }}</p>
@@ -17,7 +18,6 @@
             </div>
             <p><strong>車体特徴：</strong>{{ $abdbike->features }}</p>
             <p><strong>その他：</strong>{{ $abdbike->other }}</p>
-            <p><strong>最終更新日：</strong>{{ $abdbike->updated_at }}</p>
         </div>
     </div>
 

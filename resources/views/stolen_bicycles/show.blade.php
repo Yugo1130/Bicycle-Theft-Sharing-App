@@ -4,6 +4,7 @@
     </x-slot>
     <div class='slnbikes'>
         <div class="slnbike">
+            <p><strong>投稿ユーザID：</strong>{{ $slnbike->user_id }}<strong> / 最終更新日：</strong>{{ $slnbike->updated_at }}</p>
             <img src="{{ empty($slnbike->image_path) ? asset('images/no-image.png') : $slnbike->image_path }}" alt="プレビュー画像" style="max-width: 300px; height: auto;">
             <div class="slnbike-info">
                 <p><strong>車種：</strong>{{ $slnbike->model }}</p>
@@ -17,7 +18,6 @@
             </div>
             <p><strong>車体特徴：</strong>{{ $slnbike->features }}</p>
             <p><strong>その他：</strong>{{ $slnbike->other }}</p>
-            <p><strong>最終更新日：</strong>{{ $slnbike->updated_at }}</p>
         </div>
     </div>
 

@@ -15,17 +15,16 @@ class StolenCommentController extends Controller
         $comment->user_id = auth()->id();
         $comment->comment = $request->input('comment');
         $comment->save();
-
-        return redirect('/stolenbicycles/' . $slnbike->id);
+        return redirect()->route('sln.show', $slnbike);
     }
 
     public function delete(StolenComment $comment)
     {
-        // 必要であれば認可チェックなどを追加
-        // if (auth()->id() !== $comment->user_id) { abort(403); }
-
+        if (auth()->id() !== $comment->user_id) {
+            abort(403, '権限がありません');
+        }
         $slnbike_id = $comment->stolen_bicycle_id;
         $comment->delete();
-        return redirect('/stolenbicycles/' . $slnbike_id);
+        return redirect()->route('sln.show', $slnbike);
     }
 }
