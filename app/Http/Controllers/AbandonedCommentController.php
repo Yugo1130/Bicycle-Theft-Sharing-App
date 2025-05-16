@@ -15,17 +15,18 @@ class AbandonedCommentController extends Controller
         $comment->user_id = auth()->id();
         $comment->comment = $request->input('comment');
         $comment->save();
+        return redirect()->route('abd.show', $abdbike);
 
-        return redirect('/abandonedbicycles/' . $abdbike->id);
     }
 
     public function delete(AbandonedComment $comment)
     {
-        // 必要であれば認可チェックなどを追加
-        // if (auth()->id() !== $comment->user_id) { abort(403); }
-
+        if (auth()->id() !== $comment->user_id) {
+            abort(403, '権限がありません');
+        }
         $abdbike_id = $comment->abandoned_bicycle_id;
         $comment->delete();
-        return redirect('/abandonedbicycles/' . $abdbike_id);
+        return redirect()->route('abd.show', $abdbike);
+
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\AbandonedBicycle;
+use App\Http\Requests\AbandonedBicycleRequest;
 use Cloudinary;
 
 class AbandonedBicycleController extends Controller
@@ -47,7 +48,7 @@ class AbandonedBicycleController extends Controller
     }
 
     // 投稿登録
-    public function store(Request $request)
+    public function store(AbandonedBicycleRequest $request)
     {
         $abdbike = new AbandonedBicycle();
         if ($request->hasFile('image')) {
@@ -56,35 +57,25 @@ class AbandonedBicycleController extends Controller
         $abdbike->user_id = auth()->id();
         $input = $request['abandonedbicycle'];
         $abdbike->fill($input)->save();
-        return redirect('/abandonedbicycles/' . $abdbike->id);
+        return redirect()->route('abd.show', $abdbike);
     }
 
     // 投稿削除
     public function delete(AbandonedBicycle $abdbike)
     {
-        // if (!auth()->check()) {
-        //     // 未ログインならログインページへ
-        //     return redirect()->route('login'); // または abort(401)
-        // }
-
-        // if (auth()->id() !== $abdbike->user_id) {
-        //     abort(403, '権限がありません．');
-        // }
+        if (auth()->id() !== $abdbike->user_id) {
+            abort(403, '権限がありません');
+        }
         $abdbike->delete();
-        return redirect('/abandonedbicycles');
+        return redirect()->route('abd.index');
     }
 
     // 投稿編集
     public function edit(AbandonedBicycle $abdbike)
     {
-        // if (!auth()->check()) {
-        //     // 未ログインならログインページへ
-        //     return redirect()->route('login'); // または abort(401)
-        // }
-
-        // if (auth()->id() !== $abdbike->user_id) {
-        //     abort(403, '権限がありません．');
-        // }
+        if (auth()->id() !== $abdbike->user_id) {
+            abort(403, '権限がありません');
+        }
         $models = config("bicycle.models");
         $manufacturers = collect(config("bicycle.manufacturers"))->sortKeys();
         $prefectures = config("bicycle.prefectures");
@@ -92,8 +83,11 @@ class AbandonedBicycleController extends Controller
     }
 
     // 編集後投稿登録
-    public function update(Request $request, AbandonedBicycle $abdbike)
+    public function update(AbandonedBicycleRequest $request, AbandonedBicycle $abdbike)
     {
+        if (auth()->id() !== $abdbike->user_id) {
+            abort(403, '権限がありません');
+        }
         // 画像が選択された時だけ更新する
         if ($request->hasFile('image')) {
             $abdbike->image_path = Cloudinary::upload($request->file('image')->getRealPath(), ['public_id' => 'abdbike_' . $abdbike->id, 'overwrite' => true])->getSecurePath();
@@ -101,6 +95,6 @@ class AbandonedBicycleController extends Controller
         $abdbike->user_id = auth()->id();
         $input = $request['abandonedbicycle'];
         $abdbike->fill($input)->save();
-        return redirect('/abandonedbicycles/' . $abdbike->id);
+        return redirect()->route('abd.show', $abdbike);
     }
 }
