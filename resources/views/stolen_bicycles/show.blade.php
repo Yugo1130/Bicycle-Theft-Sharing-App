@@ -4,7 +4,6 @@
     </x-slot>
     <div class='slnbikes'>
         <div class="slnbike">
-            <!-- 要修正 -->
             <img src="{{ empty($slnbike->image_path) ? asset('images/no-image.png') : $slnbike->image_path }}" alt="プレビュー画像" style="max-width: 300px; height: auto;">
             <div class="slnbike-info">
                 <p><strong>車種：</strong>{{ $slnbike->model }}</p>
@@ -21,13 +20,14 @@
             <p><strong>最終更新日：</strong>{{ $slnbike->updated_at }}</p>
         </div>
     </div>
+
     @auth
     @if (Auth::id() === $slnbike->user_id)
     <div>
-        <a href="{{ url('/stolenbicycles/' . $slnbike->id . '/edit') }}">
+        <a href="{{ route('sln.edit', $slnbike) }}">
             <button type="button">編集</button>
         </a>
-        <form action="/stolenbicycles/{{ $slnbike->id }}" id="form_{{ $slnbike->id }}" method="POST">
+        <form action="{{ route('sln.delete', $slnbike) }}" id="form_{{ $slnbike->id }}" method="POST">
             @csrf
             @method('DELETE')
             <button type="button" onclick="deleteSlnbike({{ $slnbike->id }})">削除</button>
@@ -35,13 +35,14 @@
     </div>
     @endif
     @endauth
+
     <div class="footer">
-        <a href="/stolenbicycles">一覧へ戻る</a>
+        <a href="{{ route('sln.index') }}">一覧へ戻る</a>
     </div>
 
     <h2>コメント作成</h2>
     @if (Auth::check())
-    <form action="/stolenbicycles/{{ $slnbike->id }}/comments" method="POST">
+    <form action="{{ route('slncmtstore', $slnbike) }}" method="POST">
         @csrf
         <textarea name="comment" rows="4" cols="50" required></textarea>
         <br>
@@ -53,6 +54,7 @@
     @endphp
     <a href="{{ route('login') }}">コメントを投稿するにはログインしてください．</a>
     @endif
+
     <h2>コメント一覧</h2>
     <div class='comments'>
         @foreach ($comments as $comment)
@@ -61,26 +63,26 @@
             <p>{{ $comment->comment }}</p>
             @auth
             @if (Auth::id() === $comment->user_id)
-            <form action="/stolencomments/{{ $comment->id }}" id="form_{{ $comment->id }}" method="POST">
+            <form action="{{ route('slncmt.delete', $comment) }}" id="form_{{ $comment->id }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="button" onclick="deletecomment({{ $comment->id }})">削除</button>
-                @endif
-                @endauth
             </form>
+            @endif
+            @endauth
         </div>
         @endforeach
     </div>
 
     <div class="footer">
-        <a href="/stolenbicycles">一覧へ戻る</a>
+        <a href="{{ route('sln.index') }}">一覧へ戻る</a>
     </div>
 
     <script>
-        function deleteSlnbike(id) {
-            // 厳格モード有効
-            'use strict';
+        // 厳格モード有効
+        'use strict';
 
+        function deleteSlnbike(id) {
             // confirm()でダイアログ出力
             if (confirm('削除すると復元できません。\n本当に削除しますか？')) {
                 document.getElementById(`form_${id}`).submit();
@@ -88,9 +90,6 @@
         }
 
         function deletecomment(id) {
-            // 厳格モード有効
-            'use strict';
-
             // confirm()でダイアログ出力
             if (confirm('コメントを削除しますか？')) {
                 document.getElementById(`form_${id}`).submit();
