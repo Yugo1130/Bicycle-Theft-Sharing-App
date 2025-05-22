@@ -6,6 +6,7 @@ use App\Http\Controllers\StolenBicycleController;
 use App\Http\Controllers\AbandonedBicycleController;
 use App\Http\Controllers\StolenCommentController;
 use App\Http\Controllers\AbandonedCommentController;
+use App\Http\Controllers\MypageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/mypage', [MypageController::class, 'show'])->name('mypage.show');
 });
 
 require __DIR__ . '/auth.php';
@@ -36,7 +38,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::delete('/stolenbicycles/{slnbike}', [StolenBicycleController::class, 'delete'])->name('sln.delete');
     Route::put('/stolenbicycles/{slnbike}', [StolenBicycleController::class, 'update'])->name('sln.update');
     Route::get('/stolenbicycles/{slnbike}/edit', [StolenBicycleController::class, 'edit'])->name('sln.edit');
-    Route::post('/stolenbicycles/{slnbike}/comments', [StolenCommentController::class, 'store'])->name('slncmtstore');
+    Route::post('/stolenbicycles/{slnbike}/comments', [StolenCommentController::class, 'store'])->name('slncmt.store');
     Route::delete('/stolencomments/{comment}', [StolenCommentController::class, 'delete'])->name('slncmt.delete');
 });
 
