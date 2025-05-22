@@ -26,7 +26,7 @@ class AbandonedCommentController extends Controller
         }
         $abdbike_id = $comment->abandoned_bicycle_id;
         $comment->delete();
-        return redirect()->route('abd.show', $abdbike);
+        return redirect()->route('abd.show', $abdbike_id);
 
     }
 }

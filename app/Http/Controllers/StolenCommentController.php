@@ -25,6 +25,6 @@ class StolenCommentController extends Controller
         }
         $slnbike_id = $comment->stolen_bicycle_id;
         $comment->delete();
-        return redirect()->route('sln.show', $slnbike);
+        return redirect()->route('sln.show', $slnbike_id);
     }
 }
