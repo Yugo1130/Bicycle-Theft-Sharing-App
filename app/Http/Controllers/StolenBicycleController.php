@@ -67,7 +67,7 @@ class StolenBicycleController extends Controller
             abort(403, '権限がありません');
         }
         $slnbike->delete();
-        return redirect()->route('sln.show');
+        return redirect()->route('sln.index');
     }
 
     public function edit(StolenBicycle $slnbike)
