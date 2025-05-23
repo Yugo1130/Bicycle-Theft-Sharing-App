@@ -1,17 +1,24 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-xl font-semibold leading-tight text-gray-800">
-            全国で盗難された自転車の情報です．情報提供をお願いします．
-        </h2>
+        <div class="flex justify-between items-center">
+            <h2 class="text-xl font-semibold leading-tight text-gray-800">
+                盗難された自転車の情報です．情報提供をお願いします．
+            </h2>
+            <div class="flex items-center gap-4">
+                <a href="{{ route('sln.create') }}" class="text-blue-600 underline">
+                    盗難自転車情報登録はこちら
+                </a>
+                <a href="{{ route('abd.create') }}" class="text-blue-600 underline">
+                    放置自転車情報登録はこちら
+                </a>
+                @guest
+                <span class="text-sm text-gray-600">※ログインが必要です．</span>
+                @endguest
+            </div>
+        </div>
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <a href="{{ route('abd.create') }}" class="block text-blue-600 underline">
-                    放置されている自転車を発見された方（放置自転車情報登録）
-                </a>
-                <span class="text-sm text-gray-600">※ログインが必要です．</span>
-            </div>
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <form action="{{ route('sln.index') }}" method="GET">
                     <div>
