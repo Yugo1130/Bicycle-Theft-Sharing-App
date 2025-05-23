@@ -9,7 +9,7 @@
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="grid grid-cols-1 gap-6">
                     <div class="text-sm text-gray-500 text-right whitespace-nowrap">
-                        <p><strong>投稿ユーザID：</strong>{{ $slnbike->user_id }}</p>
+                        <p><strong>投稿ユーザ：</strong>{{ $slnbike->user->name }} (ID:{{$slnbike->user_id}})</p>
                         <p><strong>最終更新日：</strong>{{ $slnbike->updated_at }}</p>
                     </div>
                     <div class="bg-white p-6 rounded shadow sm:rounded-lg">
