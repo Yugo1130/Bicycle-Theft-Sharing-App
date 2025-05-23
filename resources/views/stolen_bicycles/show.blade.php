@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
-            放置自転車詳細
+            盗難自転車詳細
         </h2>
     </x-slot>
     <div class="py-12">
@@ -14,15 +14,13 @@
                         <p><strong>最終更新日：</strong>{{ $slnbike->updated_at }}</p>
                     </div>
                     <div class="bg-white p-6 rounded shadow sm:rounded-lg">
-
                         <div class="flex justify-between items-start mb-4">
                             <div class="flex gap-6">
                                 <!-- 左: 画像 -->
-                                <div class="flex justify-center items-center" style="width: 400px;">
+                                <div class="flex justify-center items-center" style="width: 600px;">
                                     <img src="{{ empty($slnbike->image_path) ? asset('images/no-image.png') : $slnbike->image_path }}"
                                         alt="プレビュー画像"
-                                        class="max-h-full object-contain"
-                                        style="max-width: 400px; height: auto;">
+                                        class="max-h-full object-contain">
                                 </div>
 
                                 <!-- 中央: 情報 -->

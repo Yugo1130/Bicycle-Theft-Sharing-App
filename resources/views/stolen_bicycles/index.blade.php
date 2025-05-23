@@ -44,14 +44,10 @@
                             class="mt-1 block w-full rounded border-gray-300 shadow-sm">
                     </div>
                     <div class="w-full pt-4 flex justify-between">
-                        <div>
-                            <a href="{{ route('sln.index') }}">
-                                <x-danger-button type="button">{{ __('絞り込み条件クリア') }} </x-danger-button>
-                            </a>
-                        </div>
-                        <div>
-                            <x-primary-button type="submit">{{ __('検索') }}</x-primary-button>
-                        </div>
+                        <a href="{{ route('sln.index') }}">
+                            <x-secondary-button type="button">{{ __('絞り込み条件クリア') }} </x-secondary-button>
+                        </a>
+                        <x-primary-button type="submit">{{ __('検索') }}</x-primary-button>
                     </div>
                 </form>
 
@@ -64,10 +60,9 @@
                         <div class="flex justify-between items-start mb-4">
                             <div class="flex gap-6">
                                 <!-- 左: 画像 -->
-                                <img src="{{ empty($slnbike->image_path) ? asset('images/no-image.png') : $slnbike->image_path }}"
-                                    alt="プレビュー画像"
-                                    style="max-width: 200px; height: auto;">
-
+                                <div class="flex justify-center items-center" style="width: 300px; height: 200px;">
+                                    <img src="{{ empty($slnbike->image_path) ? asset('images/no-image.png') : $slnbike->image_path }}" alt="プレビュー画像">
+                                </div>
                                 <!-- 中央: 情報 -->
                                 <div class="text-sm text-gray-700 space-y-1">
                                     <p><strong>車種：</strong>{{ $slnbike->model }}</p>
