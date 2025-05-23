@@ -11,7 +11,7 @@
                 <form action="{{ route('abd.update', $abdbike) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-                    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                    <div class="grid grid-cols-1 gap-6">
                         <div class="bg-white p-6 rounded shadow sm:rounded-lg">
                             <div class="image">
                                 <label for="image"></label>

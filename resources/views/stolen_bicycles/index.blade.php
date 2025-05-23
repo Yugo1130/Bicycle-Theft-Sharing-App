@@ -53,7 +53,7 @@
 
             </div>
 
-            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div class="grid grid-cols-1 gap-6">
                 @foreach ($slnbikes as $slnbike)
                 <a href="{{ route('sln.show', $slnbike) }}">
                     <div class="bg-white p-6 rounded shadow sm:rounded-lg">

@@ -10,7 +10,7 @@
             <p>投稿一覧</p>
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <p>盗難自転車</p>
-                <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <div class="grid grid-cols-1 gap-6">
                     @if ($slnbikes->isEmpty())
                     <p class="text-gray-500">コメントはまだありません.</p>
                     @endif
@@ -46,7 +46,7 @@
             </div>
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <p>放置自転車</p>
-                <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <div class="grid grid-cols-1 gap-6">
                     @if ($abdbikes->isEmpty())
                     <p class="text-gray-500">コメントはまだありません.</p>
                     @endif
@@ -83,7 +83,7 @@
             <p>コメントした投稿</p>
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <p>盗難自転車</p>
-                <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <div class="grid grid-cols-1 gap-6">
                     <div class='slncomments'>
                         @if ($slncomments->isEmpty())
                         <p class="text-gray-500">コメントはまだありません.</p>
@@ -121,7 +121,7 @@
             </div>
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <p>放置自転車</p>
-                <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <div class="grid grid-cols-1 gap-6">
                     <div class='abdcomments'>
                         @if ($abdcomments->isEmpty())
                         <p class="text-gray-500">コメントはまだありません.</p>
