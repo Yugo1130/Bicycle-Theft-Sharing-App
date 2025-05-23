@@ -14,15 +14,13 @@
                         <p><strong>最終更新日：</strong>{{ $abdbike->updated_at }}</p>
                     </div>
                     <div class="bg-white p-6 rounded shadow sm:rounded-lg">
-
                         <div class="flex justify-between items-start mb-4">
                             <div class="flex gap-6">
                                 <!-- 左: 画像 -->
-                                <div class="flex justify-center items-center" style="width: 400px;">
+                                <div class="flex justify-center items-center" style="width: 600px;">
                                     <img src="{{ empty($abdbike->image_path) ? asset('images/no-image.png') : $abdbike->image_path }}"
                                         alt="プレビュー画像"
-                                        class="max-h-full object-contain"
-                                        style="max-width: 400px; height: auto;">
+                                        class="max-h-full object-contain">
                                 </div>
 
                                 <!-- 中央: 情報 -->

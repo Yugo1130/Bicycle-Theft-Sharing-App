@@ -20,11 +20,10 @@
                             <div class="flex justify-between items-start mb-4">
                                 <div class="flex gap-6">
                                     <!-- 左: 画像 -->
-                                    <div class="flex justify-center items-center" style="width: 200px;">
+                                    <div class="flex justify-center items-center" style="width: 300px; height: 200px;">
                                         <img src="{{ empty($slnbike->image_path) ? asset('images/no-image.png') : $slnbike->image_path }}"
                                             alt="プレビュー画像"
-                                            class="max-h-full object-contain"
-                                            style="max-width: 200px; height: auto;">
+                                            class="max-h-full object-contain">
                                     </div>
                                     <!-- 中央: 情報 -->
                                     <div class="text-sm text-gray-700 space-y-1">
@@ -57,11 +56,10 @@
                             <div class="flex justify-between items-start mb-4">
                                 <div class="flex gap-6">
                                     <!-- 左: 画像 -->
-                                    <div class="flex justify-center items-center" style="width: 200px;">
+                                    <div class="flex justify-center items-center" style="width: 300px; height: 200px;">
                                         <img src="{{ empty($abdbike->image_path) ? asset('images/no-image.png') : $abdbike->image_path }}"
                                             alt="プレビュー画像"
-                                            class="max-h-full object-contain"
-                                            style="max-width: 200px; height: auto;">
+                                            class="max-h-full object-contain">
                                     </div>
                                     <!-- 中央: 情報 -->
                                     <div class="text-sm text-gray-700 space-y-1">
@@ -96,11 +94,10 @@
                                 <div class="flex justify-between items-start mb-4">
                                     <div class="flex gap-6">
                                         <!-- 左: 画像 -->
-                                        <div class="flex justify-center items-center" style="width: 200px;">
+                                        <div class="flex justify-center items-center" style="width: 300px; height: 200px;">
                                             <img src="{{ empty($comments->first()->stolen_bicycle->image_path) ? asset('images/no-image.png') : $comments->first()->stolen_bicycle->image_path }}"
                                                 alt="プレビュー画像"
-                                                class="max-h-full object-contain"
-                                                style="max-width: 200px; height: auto;">
+                                                class="max-h-full object-contain">
                                         </div>
                                         <!-- 中央: 情報 -->
                                         <div class="text-sm text-gray-700 space-y-1">
@@ -135,11 +132,10 @@
                                 <div class="flex justify-between items-start mb-4">
                                     <div class="flex gap-6">
                                         <!-- 左: 画像 -->
-                                        <div class="flex justify-center items-center" style="width: 200px;">
+                                        <div class="flex justify-center items-center" style="width: 300px; height: 200px;">
                                             <img src="{{ empty($comments->first()->abandoned_bicycle->image_path) ? asset('images/no-image.png') : $comments->first()->abandoned_bicycle->image_path }}"
                                                 alt="プレビュー画像"
-                                                class="max-h-full object-contain"
-                                                style="max-width: 200px; height: auto;">
+                                                class="max-h-full object-contain">
                                         </div>
                                         <!-- 中央: 情報 -->
                                         <div class="text-sm text-gray-700 space-y-1">

@@ -5,7 +5,9 @@
         </h2>
     </x-slot>
     <div class="py-12">
+        <!-- 画面中央に寄せて読みやすくする -->
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+            <!-- 白背景のカード風のブロックを作る -->
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <a href="{{ route('sln.create') }}" class="block text-blue-600 underline">
                     探している自転車が一覧にない場合はこちら（盗難自転車情報登録）
@@ -44,14 +46,11 @@
                             class="mt-1 block w-full rounded border-gray-300 shadow-sm">
                     </div>
                     <div class="w-full pt-4 flex justify-between">
-                        <div>
-                            <a href="{{ route('abd.index') }}">
-                                <x-danger-button type="button">{{ __('絞り込み条件クリア') }} </x-danger-button>
-                            </a>
-                        </div>
-                        <div>
-                            <x-primary-button type="submit">{{ __('検索') }}</x-primary-button>
-                        </div>
+                        <a href="{{ route('abd.index') }}">
+                            <x-secondary-button type="button">{{ __('絞り込み条件クリア') }} </x-secondary-button>
+                        </a>
+                        <x-primary-button type="submit">{{ __('検索') }}</x-primary-button>
+
                     </div>
                 </form>
 
@@ -64,9 +63,9 @@
                         <div class="flex justify-between items-start mb-4">
                             <div class="flex gap-6">
                                 <!-- 左: 画像 -->
-                                <img src="{{ empty($abdbike->image_path) ? asset('images/no-image.png') : $abdbike->image_path }}"
-                                    alt="プレビュー画像"
-                                    style="max-width: 200px; height: auto;">
+                                <div class="flex justify-center items-center" style="width: 300px; height: 200px;">
+                                    <img src="{{ empty($abdbike->image_path) ? asset('images/no-image.png') : $abdbike->image_path }}" alt="プレビュー画像">
+                                </div>
 
                                 <!-- 中央: 情報 -->
                                 <div class="text-sm text-gray-700 space-y-1">
@@ -86,7 +85,6 @@
                     </div>
                 </a>
                 @endforeach
-
             </div>
 
             <div class="mt-6">
