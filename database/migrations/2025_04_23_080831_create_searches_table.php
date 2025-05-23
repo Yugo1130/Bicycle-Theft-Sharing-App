@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('searches', function (Blueprint $table) {
-            $table->id();                                      // 放置自転車投稿ID（主キー）
+            $table->id();                                      // 検索条件ID（主キー）
             $table->foreignID('user_id')->constrained()->onDelete('cascade');       // ユーザID（外部キー） 
             $table->string('model', 50);                       // 車種（シティサイクル，クロスバイクなど）
             $table->string('manufacturer', 50)->nullable();    // メーカー名

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\StolenBicycle;
 use App\Models\StolenComment;
+use App\Mail\StolenCommentNotificationMail;
+use Illuminate\Support\Facades\Mail;
 
 class StolenCommentController extends Controller
 {
@@ -15,6 +17,12 @@ class StolenCommentController extends Controller
         $comment->user_id = auth()->id();
         $comment->comment = $request->input('comment');
         $comment->save();
+
+        // 投稿主にメールが届く
+        if ($slnbike->user_id !== auth()->id()) {
+            Mail::to($slnbike->user->email)->send(new StolenCommentNotificationMail($comment));
+        }
+
         return redirect()->route('sln.show', $slnbike);
     }
 

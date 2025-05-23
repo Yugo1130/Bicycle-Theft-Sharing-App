@@ -78,7 +78,7 @@
 
                             <!-- 右上: 投稿ユーザIDと日時 -->
                             <div class="text-sm text-gray-500 text-right whitespace-nowrap">
-                                <p><strong>投稿ユーザID：</strong>{{ $abdbike->user_id }}</p>
+                                <p><strong>投稿ユーザ：</strong>{{ $abdbike->user->name }} (ID:{{$abdbike->user_id}})</p>
                                 <p><strong>最終更新日：</strong>{{ $abdbike->updated_at }}</p>
                             </div>
                         </div>

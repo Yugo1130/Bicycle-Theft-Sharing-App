@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\AbandonedBicycle;
 use App\Models\AbandonedComment;
+use App\Mail\AbandonedCommentNotificationMail;
+use Illuminate\Support\Facades\Mail;
 
 class AbandonedCommentController extends Controller
 {
@@ -15,8 +17,13 @@ class AbandonedCommentController extends Controller
         $comment->user_id = auth()->id();
         $comment->comment = $request->input('comment');
         $comment->save();
-        return redirect()->route('abd.show', $abdbike);
 
+        // 投稿主にメールが届く
+        if ($abdbike->user_id !== auth()->id()) {
+            Mail::to($abdbike->user->email)->send(new AbandonedCommentNotificationMail($comment));
+        }
+
+        return redirect()->route('abd.show', $abdbike);
     }
 
     public function delete(AbandonedComment $comment)
