@@ -12,7 +12,7 @@
                 <p>盗難自転車</p>
                 <div class="grid grid-cols-1 gap-6">
                     @if ($slnbikes->isEmpty())
-                    <p class="text-gray-500">コメントはまだありません.</p>
+                    <p class="text-gray-500">投稿はまだありません.</p>
                     @endif
                     @foreach ($slnbikes as $slnbike)
                     <a href="{{ route('sln.show', $slnbike) }}">
@@ -48,7 +48,7 @@
                 <p>放置自転車</p>
                 <div class="grid grid-cols-1 gap-6">
                     @if ($abdbikes->isEmpty())
-                    <p class="text-gray-500">コメントはまだありません.</p>
+                    <p class="text-gray-500">投稿はまだありません.</p>
                     @endif
                     @foreach ($abdbikes as $abdbike)
                     <a href="{{ route('abd.show', $abdbike) }}">
