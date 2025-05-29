@@ -100,16 +100,16 @@
                                         </div>
                                         <!-- 中央: 情報 -->
                                         <div class="text-sm text-gray-700 space-y-1">
-                                            <p><strong>車種：</strong>{{ $slnbike->model }}</p>
-                                            <p><strong>メーカー名：</strong>{{ $slnbike->manufacturer }}</p>
-                                            <p><strong>車体名：</strong>{{ $slnbike->model_name }}</p>
-                                            <p><strong>盗難場所：</strong>{{ $slnbike->stolen_location }}</p>
+                                            <p><strong>車種：</strong>{{ $comments->first()->stolen_bicycle->model }}</p>
+                                            <p><strong>メーカー名：</strong>{{ $comments->first()->stolen_bicycle->manufacturer }}</p>
+                                            <p><strong>車体名：</strong>{{ $comments->first()->stolen_bicycle->model_name }}</p>
+                                            <p><strong>盗難場所：</strong>{{ $comments->first()->stolen_bicycle->stolen_location }}</p>
                                         </div>
                                     </div>
                                     <!-- 右上: 投稿ユーザIDと日時 -->
                                     <div class="text-sm text-gray-500 text-right whitespace-nowrap">
-                                        <p><strong>最終更新日：</strong>{{ $slnbike->updated_at }}</p>
-                                        <p><strong>投稿日：</strong>{{ $slnbike->created_at }}</p>
+                                        <p><strong>最終更新日：</strong>{{ $comments->first()->stolen_bicycle->updated_at }}</p>
+                                        <p><strong>投稿日：</strong>{{ $comments->first()->stolen_bicycle->created_at }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -138,16 +138,16 @@
                                         </div>
                                         <!-- 中央: 情報 -->
                                         <div class="text-sm text-gray-700 space-y-1">
-                                            <p><strong>車種：</strong>{{ $abdbike->model }}</p>
-                                            <p><strong>メーカー名：</strong>{{ $abdbike->manufacturer }}</p>
-                                            <p><strong>車体名：</strong>{{ $abdbike->model_name }}</p>
-                                            <p><strong>盗難場所：</strong>{{ $abdbike->found_location }}</p>
+                                            <p><strong>車種：</strong>{{ $comments->first()->abandoned_bicycle->model }}</p>
+                                            <p><strong>メーカー名：</strong>{{ $comments->first()->abandoned_bicycle->manufacturer }}</p>
+                                            <p><strong>車体名：</strong>{{ $comments->first()->abandoned_bicycle->model_name }}</p>
+                                            <p><strong>盗難場所：</strong>{{ $comments->first()->abandoned_bicycle->found_location }}</p>
                                         </div>
                                     </div>
                                     <!-- 右上: 投稿ユーザIDと日時 -->
                                     <div class="text-sm text-gray-500 text-right whitespace-nowrap">
-                                        <p><strong>最終更新日：</strong>{{ $abdbike->updated_at }}</p>
-                                        <p><strong>投稿日：</strong>{{ $abdbike->created_at }}</p>
+                                        <p><strong>最終更新日：</strong>{{ $comments->first()->abandoned_bicycle->updated_at }}</p>
+                                        <p><strong>投稿日：</strong>{{ $comments->first()->abandoned_bicycle->created_at }}</p>
                                     </div>
                                 </div>
                             </div>
