@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,7 +23,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrap();
-        \URL::forceScheme('https'); //https通信に対応
-        $this->app['request']->server->set('HTTPS','on'); //ページネーションに対応
+        // APP_ENVがproductionの時だけ有効
+        // デプロイ先で要設定
+        if (App::environment('production')) {
+            URL::forceScheme('https'); // HTTPS リダイレクトを有効にする
+            $this->app['request']->server->set('HTTPS', 'on'); // ページネーションURLもhttpsになるように
+        }
     }
 }
