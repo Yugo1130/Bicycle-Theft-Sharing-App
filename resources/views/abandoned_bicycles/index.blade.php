@@ -98,5 +98,15 @@
                 {{ $abdbikes->links('vendor.pagination.tailwind') }}
             </div>
         </div>
+        <!-- <div class="fixed bottom-4 inset-x-0 w-full flex justify-center z-50"> 
+            <button
+                type="button"
+                onclick="saveConditions()"
+                class="bg-red-600 hover:bg-red-700 text-white text-lg font-semibold py-3 px-6 rounded-full shadow-lg transition w-1/2 max-w-[600px]">
+                検索条件を保存
+            </button>
+        </div> -->
     </div>
+
+
 </x-app-layout>

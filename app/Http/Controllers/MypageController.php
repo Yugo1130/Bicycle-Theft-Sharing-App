@@ -7,7 +7,7 @@ use App\Models\StolenBicycle;
 use App\Models\AbandonedBicycle;
 use App\Models\StolenComment;
 use App\Models\AbandonedComment;
-use App\Http\Requests\MypageRequest;
+// use App\Http\Requests\MypageRequest;
 
 class MypageController extends Controller
 {

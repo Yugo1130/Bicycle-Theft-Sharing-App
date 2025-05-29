@@ -27,6 +27,6 @@ class AbandonedComment extends Model
 
     public function getUserComments(int $userId)
     {
-        return $this->where('user_id', $userId)->orderby('updated_at', 'DESC')->get()->groupBy('stolen_bicycle_id');
+        return $this->where('user_id', $userId)->orderby('updated_at', 'DESC')->get()->groupBy('abandoned_bicycle_id');
     }
 }

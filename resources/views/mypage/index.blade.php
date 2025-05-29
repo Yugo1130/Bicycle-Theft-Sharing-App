@@ -3,7 +3,6 @@
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
             マイページ
         </h2>
-
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
@@ -155,6 +154,11 @@
                         </a>
                         @endforeach
                     </div>
+                </div>
+            </div>
+            <p>保存した検索条件</p>
+            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                <div class="grid grid-cols-1 gap-6">
                 </div>
             </div>
         </div>
